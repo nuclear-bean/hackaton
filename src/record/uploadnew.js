@@ -17,6 +17,8 @@ export const uploadBlobToBucket = async (blob, bucketName, fileName, accessToken
         if (response.ok) {
             const result = await response.json();
             console.log('File uploaded successfully:', result);
+        } else if (response.status === 400) {
+            return 'Hi, good to see you back! What is on your mind today?'
         } else {
             console.error('Error uploading file:', response.status, response.statusText);
         }
