@@ -65,6 +65,7 @@ const VideoRecorder = () => {
             setIsRecording(false);
             console.log("uploading")
             console.log(recordedBlob)
+            setMessages((prevMessages) => [...prevMessages, '< Video >']);
             await uploadBlobToBucket(recordedBlob, 'audio-files-122', 'video-2', accessToken)
             const result = await sendBlobRequest();
             let data = JSON.parse(result);

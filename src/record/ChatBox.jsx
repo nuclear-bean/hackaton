@@ -21,7 +21,7 @@ const ChatBox = ({messages}) => {
                     {messages.map((message, index) => (
                         <div
                             key={index}
-                            className={'message received'}
+                            className={message=== '< Video >' ? 'message sent' : 'message received'}
                         >
                             {message}
                         </div>
