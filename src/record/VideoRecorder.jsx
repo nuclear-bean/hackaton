@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import './VideoRecorder.css';
+import {uploadBlobToBucket} from "./uploadnew.js";
 
 const VideoRecorder = () => {
     const [isRecording, setIsRecording] = useState(false);
@@ -7,6 +8,7 @@ const VideoRecorder = () => {
     const videoRef = useRef(null);
     const mediaRecorderRef = useRef(null);
     const chunksRef = useRef([]);
+    const accessToken = 'ya29.a0AeDClZAcdvWgBaohKCosAE4895_KCGdgRZjo06Q7ZAFpdOnmm6RonztU4TH_h7x8pTLdVfP7OlxGdvprEjH8d2nQR1wfDfg3ONcXlgpzy1qSiZTq56OxhOEIgsbNMREDQNZgezMWphG_y5k0ou2_h5d80SKPPfUX1xqyMOVcMKcvZgaCgYKAY8SARASFQHGX2MizlOoV6KHVWndaQCoesjxVA0181'
 
     const startRecording = async () => {
         try {
@@ -33,11 +35,12 @@ const VideoRecorder = () => {
         }
     };
 
-    const stopRecording = () => {
+    const stopRecording = async () => {
         if (mediaRecorderRef.current && isRecording) {
             mediaRecorderRef.current.stop();
             videoRef.current.srcObject.getTracks().forEach(track => track.stop());
             setIsRecording(false);
+            await uploadBlobToBucket(recordedBlob, 'audio-files-122', 'test', accessToken)
         }
     };
 
