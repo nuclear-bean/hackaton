@@ -13,7 +13,7 @@ const VideoRecorder = () => {
     const videoRef = useRef(null);
     const mediaRecorderRef = useRef(null);
     const chunksRef = useRef([]);
-    const accessToken = 'ya29.a0AeDClZCW8xJwhQAzo7HNNJ5Br53S9b9WZyqKE0CPsoK9YkyNgt3AvpjrYZdzN_qwZ5EkNOxH2Xv5K7S0FmPYpFYRqIsgQrlgTASuRhOm07O7Tu-yyGKGuw99zSqlNDvSwqp74rxGm4l3fREmhZdUcweN0BUBQ-xs3eCfr3P-msdO2XAaCgYKATMSARASFQHGX2Mi2LNrrdSe9tZjvlumamECVQ0182'
+    const accessToken = 'ya29.a0AeDClZCYA5qc3AR-X1jwTNtDE5oHX_D9y1l1Pa-IVS6HgQQbgWXrxjOqCrDFtDP6WKEqQpNH499WCfXim201qYoQhrOPkKC1Snj4KRUgIMECOyDAxLxX3aC_d-dihJSvJ_Mi18N1KbMDMHKbTeGk0uiI8oHnVjHX2JO77h_xl4Yd8EIaCgYKAaESARASFQHGX2Mi93N0K5etZENH7hy_RaEzHw0182'
 
     const [messages, setMessages] = useState([
         'Hello! How can I help you?'
@@ -67,7 +67,8 @@ const VideoRecorder = () => {
             console.log(recordedBlob)
             setMessages((prevMessages) => [...prevMessages, '< Video >']);
             await uploadBlobToBucket(recordedBlob, 'audio-files-122', 'video-2', accessToken)
-            const result = await sendBlobRequest();
+            await sleep(100);
+            const result = await sendBlobRequest(accessToken);
             let data = JSON.parse(result);
             console.log(data)
             let message = combineTextFields(data)
@@ -76,6 +77,10 @@ const VideoRecorder = () => {
             setMessages((prevMessages) => [...prevMessages, message]);
         }
     };
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     const downloadVideo = () => {
         if (recordedBlob) {

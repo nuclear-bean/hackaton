@@ -2,7 +2,6 @@
 
 const projectId = 'tech-hackaton-442611'
 const modelId = 'gemini-1.5-flash-002'
-const accessToken = 'ya29.a0AeDClZCW8xJwhQAzo7HNNJ5Br53S9b9WZyqKE0CPsoK9YkyNgt3AvpjrYZdzN_qwZ5EkNOxH2Xv5K7S0FmPYpFYRqIsgQrlgTASuRhOm07O7Tu-yyGKGuw99zSqlNDvSwqp74rxGm4l3fREmhZdUcweN0BUBQ-xs3eCfr3P-msdO2XAaCgYKATMSARASFQHGX2Mi2LNrrdSe9tZjvlumamECVQ0182'
 export const sendPostRequest = async () => {
 
     const body = {
@@ -51,7 +50,7 @@ export const sendPostRequest = async () => {
     return response
 };
 
-export async function sendBlobRequest() {
+export async function sendBlobRequest(accessToken) {
     // Define the body structure
     const body = {
         contents: {
