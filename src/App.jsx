@@ -29,6 +29,7 @@ function App() {
             <div className={'voice-recorder-wrapper'}>
                 {/*<VoiceRecorder/>*/}
                 <VoiceRecorder2 uploadUrl={"https://storage.googleapis.com/upload/storage/v1/b/audio-files-122/o"}/>
+                <ChatWindow messages={messages}></ChatWindow>
             </div>
         </>
     }
