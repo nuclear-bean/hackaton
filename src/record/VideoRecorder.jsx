@@ -12,7 +12,7 @@ const VideoRecorder = () => {
     const videoRef = useRef(null);
     const mediaRecorderRef = useRef(null);
     const chunksRef = useRef([]);
-    const accessToken = 'ya29.a0AeDClZDcBjU0CWg99aVD5bAqgL3OoaDV8klNfGJPtnpy44Q065gBxkldMg4Nj31et4yufyCoeywrHIM6LfyVsCE3Wh7LvHGz0q-1lBtCwKfyFy_-gkMXbEy--xKsaNQlS4-5spVjRPnkkWt_ybekAuuWfyASBpwNeJ-CmqVgqBzJ24gaCgYKAQoSARASFQHGX2MiWXEGElhPbh3qA0pG03o15w0182'
+    const accessToken = 'ya29.a0AeDClZDWbEGcxmnHMEI8aDX6zotjvFRuf0TluuyPx7GvotR87RdUz10k7VWfmI5bjWAXCv4JoW0TG5fo7QHKv69K4X2cFEua6E_y8VYgGeM2mTs2iXMGYt0EuZ-razurIGzMSZY4d1rKerOviymGEUjI-uHVqU_r0i5bAvK936AmhswaCgYKAS0SARASFQHGX2MiUFief4fOhVEopXAZJ7I76w0182'
 
     const [messages, setMessages] = useState([
         'Hello! How can I help you?'
