@@ -8,7 +8,7 @@ const VideoRecorder = () => {
     const videoRef = useRef(null);
     const mediaRecorderRef = useRef(null);
     const chunksRef = useRef([]);
-    const accessToken = 'ya29.a0AeDClZAcdvWgBaohKCosAE4895_KCGdgRZjo06Q7ZAFpdOnmm6RonztU4TH_h7x8pTLdVfP7OlxGdvprEjH8d2nQR1wfDfg3ONcXlgpzy1qSiZTq56OxhOEIgsbNMREDQNZgezMWphG_y5k0ou2_h5d80SKPPfUX1xqyMOVcMKcvZgaCgYKAY8SARASFQHGX2MizlOoV6KHVWndaQCoesjxVA0181'
+    const accessToken = 'ya29.a0AeDClZCW8xJwhQAzo7HNNJ5Br53S9b9WZyqKE0CPsoK9YkyNgt3AvpjrYZdzN_qwZ5EkNOxH2Xv5K7S0FmPYpFYRqIsgQrlgTASuRhOm07O7Tu-yyGKGuw99zSqlNDvSwqp74rxGm4l3fREmhZdUcweN0BUBQ-xs3eCfr3P-msdO2XAaCgYKATMSARASFQHGX2Mi2LNrrdSe9tZjvlumamECVQ0182'
 
     const startRecording = async () => {
         try {
@@ -40,7 +40,9 @@ const VideoRecorder = () => {
             mediaRecorderRef.current.stop();
             videoRef.current.srcObject.getTracks().forEach(track => track.stop());
             setIsRecording(false);
-            await uploadBlobToBucket(recordedBlob, 'audio-files-122', 'test', accessToken)
+            console.log("uploading")
+            console.log(recordedBlob)
+            await uploadBlobToBucket(recordedBlob, 'audio-files-122', 'video', accessToken)
         }
     };
 

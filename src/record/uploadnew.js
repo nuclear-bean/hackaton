@@ -4,7 +4,7 @@ export const uploadBlobToBucket = async (blob, bucketName, fileName, accessToken
     // Prepare headers with the access token for authorization
     const headers = {
         'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': blob.type, // Ensure you set the correct MIME type
+        'Content-Type': 'video/webm', // Ensure you set the correct MIME type
     };
 
     try {
