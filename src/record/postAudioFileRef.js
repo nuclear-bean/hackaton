@@ -50,7 +50,7 @@ export const sendPostRequest = async () => {
     return response
 };
 
-export async function sendBlobRequest(accessToken) {
+export async function sendRequestToAnalyzeVideo(accessToken) {
     // Define the body structure
     const body = {
         contents: {
@@ -87,9 +87,6 @@ export async function sendBlobRequest(accessToken) {
         });
 
         // Check if the response is ok
-        if (response.status === 400) {
-            return 'Hi, good to see you back! What is on your mind today?'
-        }
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }

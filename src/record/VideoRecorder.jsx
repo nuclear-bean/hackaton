@@ -1,11 +1,10 @@
 import { useState, useRef } from 'react';
 import './VideoRecorder.css';
-import {uploadBlobToBucket} from "./uploadnew.js";
-import ChatWindow from "../ChatWindow.jsx";
+import {uploadVideoBlobToBucket} from "./uploadnew.js";
 import '../index.css'
 import '../ChatWindow.css'
 import ChatBox from "./ChatBox.jsx";
-import {sendBlobRequest} from "./postAudioFileRef.js";
+import {sendRequestToAnalyzeVideo} from "./postAudioFileRef.js";
 
 const VideoRecorder = () => {
     const [isRecording, setIsRecording] = useState(false);
@@ -66,34 +65,25 @@ const VideoRecorder = () => {
             console.log("uploading")
             console.log(recordedBlob)
             setMessages((prevMessages) => [...prevMessages, '< Video >']);
-            await uploadBlobToBucket(recordedBlob, 'audio-files-122', 'video-2', accessToken)
+            await uploadVideoBlobToBucket(recordedBlob, 'audio-files-122', 'video-2', accessToken)
             await sleep(100);
-            const result = await sendBlobRequest(accessToken);
-            let data = JSON.parse(result);
-            console.log(data)
-            let message = combineTextFields(data)
-            message = message.replace(/  +/g, ' ');
-            console.log(message)
-            setMessages((prevMessages) => [...prevMessages, message]);
+            try {
+                const result = await sendRequestToAnalyzeVideo(accessToken);
+                let data = JSON.parse(result);
+                console.log(data)
+                let message = combineTextFields(data)
+                message = message.replace(/  +/g, ' ');
+                console.log(message)
+                setMessages((prevMessages) => [...prevMessages, message]);
+            } catch (err) {
+                setMessages((prevMessages) => [...prevMessages, 'Hi, good to see you again! What\'s new?']);
+            }
         }
     };
 
     function sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-
-    const downloadVideo = () => {
-        if (recordedBlob) {
-            const url = URL.createObjectURL(recordedBlob);
-            const a = document.createElement('a');
-            document.body.appendChild(a);
-            a.style = 'display: none';
-            a.href = url;
-            a.download = 'recorded-video.webm';
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-    };
 
     return (
         <div className="video-recorder">

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 // import './VoiceRecorder.css';
 import {useVoiceRecorder} from "./useVoiceRecorder.jsx";
-import {uploadBlobToBucket} from "./uploadnew.js"
+import {uploadVideoBlobToBucket} from "./uploadnew.js"
 import {sendPostRequest} from "./postAudioFileRef.js";
 import {joinTextFields} from "./joinResponse.js";
 
@@ -17,7 +17,7 @@ export function VoiceRecorder2({ uploadUrl }) {
 
     try {
       // await uploadRecording(uploadUrl);
-      await uploadBlobToBucket(audioBlob, 'audio-files-122', 'test', accessToken)
+      await uploadVideoBlobToBucket(audioBlob, 'audio-files-122', 'test', accessToken)
       setUploadStatus('Upload successful!');
       let respJson
       await sendPostRequest()

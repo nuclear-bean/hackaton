@@ -1,4 +1,4 @@
-export const uploadBlobToBucket = async (blob, bucketName, fileName, accessToken) => {
+export const uploadVideoBlobToBucket = async (blob, bucketName, fileName, accessToken) => {
     const url = `https://storage.googleapis.com/upload/storage/v1/b/${bucketName}/o?uploadType=media&name=${fileName}`;
 
     // Prepare headers with the access token for authorization
