@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import './VideoRecorder.css';
 
 const VideoRecorder = () => {
@@ -10,7 +10,7 @@ const VideoRecorder = () => {
 
     const startRecording = async () => {
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
             videoRef.current.srcObject = stream;
             mediaRecorderRef.current = new MediaRecorder(stream);
 
@@ -29,7 +29,7 @@ const VideoRecorder = () => {
             mediaRecorderRef.current.start();
             setIsRecording(true);
         } catch (error) {
-            console.error('Error accessing camera:', error);
+            console.error('Error accessing camera or microphone:', error);
         }
     };
 
@@ -56,7 +56,14 @@ const VideoRecorder = () => {
 
     return (
         <div className="video-recorder">
-            <video ref={videoRef} className="video-preview" autoPlay muted />
+            <video ref={videoRef} className="video-preview" autoPlay muted playsInline />
+            {recordedBlob && (
+                <video
+                    className="recorded-video"
+                    src={URL.createObjectURL(recordedBlob)}
+                    controls
+                />
+            )}
             <div className="controls">
                 {!isRecording && (
                     <button className="record-button" onClick={startRecording}>
