@@ -21,9 +21,9 @@ const ChatBox = ({messages}) => {
                     {messages.map((message, index) => (
                         <div
                             key={index}
-                            className={`message ${message.sent ? 'sent' : 'received'}`}
+                            className={'message received'}
                         >
-                            {message.text}
+                            {message}
                         </div>
                     ))}
                     <div ref={messagesEndRef}/>

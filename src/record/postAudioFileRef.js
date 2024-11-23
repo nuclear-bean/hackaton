@@ -60,7 +60,7 @@ export async function sendBlobRequest() {
                 {
                     fileData: {
                         mimeType: 'video/webm',
-                        fileUri: 'gs://video-2/test'
+                        fileUri: 'gs://audio-files-122/video-2'
                     }
                 },
                 {

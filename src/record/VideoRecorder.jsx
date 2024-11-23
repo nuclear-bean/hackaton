@@ -16,7 +16,7 @@ const VideoRecorder = () => {
     const accessToken = 'ya29.a0AeDClZCW8xJwhQAzo7HNNJ5Br53S9b9WZyqKE0CPsoK9YkyNgt3AvpjrYZdzN_qwZ5EkNOxH2Xv5K7S0FmPYpFYRqIsgQrlgTASuRhOm07O7Tu-yyGKGuw99zSqlNDvSwqp74rxGm4l3fREmhZdUcweN0BUBQ-xs3eCfr3P-msdO2XAaCgYKATMSARASFQHGX2Mi2LNrrdSe9tZjvlumamECVQ0182'
 
     const [messages, setMessages] = useState([
-        {text: 'Hello! How can I help you?', type: 'received'}
+        'Hello! How can I help you?'
     ])
 
     const startRecording = async () => {
@@ -44,6 +44,20 @@ const VideoRecorder = () => {
         }
     };
 
+    function combineTextFields(response) {
+        return response
+            .map(item => {
+                return item.candidates
+                    .map(candidate => {
+                        return candidate.content.parts
+                            .map(part => part.text)
+                            .join(''); // Combine parts into a single string
+                    })
+                    .join(''); // Combine all candidates into a single string
+            })
+            .join(''); // Combine all items into a single string
+    }
+
     const stopRecording = async () => {
         if (mediaRecorderRef.current && isRecording) {
             mediaRecorderRef.current.stop();
@@ -53,7 +67,12 @@ const VideoRecorder = () => {
             console.log(recordedBlob)
             await uploadBlobToBucket(recordedBlob, 'audio-files-122', 'video-2', accessToken)
             const result = await sendBlobRequest();
-            console.log(result)
+            let data = JSON.parse(result);
+            console.log(data)
+            let message = combineTextFields(data)
+            message = message.replace(/  +/g, ' ');
+            console.log(message)
+            setMessages((prevMessages) => [...prevMessages, message]);
         }
     };
 
