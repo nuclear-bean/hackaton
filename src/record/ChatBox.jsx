@@ -15,7 +15,7 @@ const ChatBox = ({messages}) => {
             <br/>
             <div className="chat-box">
                 <div className="chat-header">
-                    <h2>Chat</h2>
+                    <h2>Chat History</h2>
                 </div>
                 <div className="messages-container">
                     {messages.map((message, index) => (

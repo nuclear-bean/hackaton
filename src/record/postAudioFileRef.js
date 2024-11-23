@@ -2,6 +2,7 @@
 
 const projectId = 'tech-hackaton-442611'
 const modelId = 'gemini-1.5-flash-002'
+
 export const sendPostRequest = async () => {
 
     const body = {
@@ -69,7 +70,7 @@ export async function sendRequestToAnalyzeVideo(accessToken) {
                         '\n' +
                         'When discussing emotional attachment, explain the concept of attachment styles (e.g., secure, anxious, avoidant, disorganized) in simple terms, and help the person identify patterns that may reflect their attachment style. If relevant, offer thoughtful advice on how to navigate relationships based on attachment theory and suggest strategies for improving connection, communication, and trust.\n' +
                         '\n' +
-                        'Always approach sensitive topics with care and sensitivity, ensuring the person feels heard, respected, and supported. If discussing intimate or personal topics like sex, always prioritize consent and emotional safety, and give the person space to share what they feel comfortable with.'
+                        'Always approach sensitive topics with care and sensitivity, ensuring the person feels heard, respected, and supported. If discussing intimate or personal topics like sex, always prioritize consent and emotional safety, and give the person space to share what they feel comfortable with. Please answer shortly when possible.'
                 }
             ]
         }

@@ -88,13 +88,6 @@ const VideoRecorder = () => {
     return (
         <div className="video-recorder">
             <video ref={videoRef} className="video-preview" autoPlay muted playsInline />
-            {/*{recordedBlob && (*/}
-            {/*    <video*/}
-            {/*        className="recorded-video"*/}
-            {/*        src={URL.createObjectURL(recordedBlob)}*/}
-            {/*        controls*/}
-            {/*    />*/}
-            {/*)}*/}
             <div className="controls">
                 {!isRecording && (
                     <button className="record-button" onClick={startRecording}>
@@ -106,11 +99,6 @@ const VideoRecorder = () => {
                         Stop Recording
                     </button>
                 )}
-                {/*{recordedBlob && (*/}
-                {/*    <button className="download-button" onClick={downloadVideo}>*/}
-                {/*        Download Video*/}
-                {/*    </button>*/}
-                {/*)}*/}
             </div>
             <ChatBox messages={messages}/>
         </div>
