@@ -1,6 +1,10 @@
 import { useState, useRef } from 'react';
 import './VideoRecorder.css';
 import {uploadBlobToBucket} from "./uploadnew.js";
+import ChatWindow from "../ChatWindow.jsx";
+import '../index.css'
+import '../ChatWindow.css'
+import ChatBox from "./ChatBox.jsx";
 
 const VideoRecorder = () => {
     const [isRecording, setIsRecording] = useState(false);
@@ -9,6 +13,8 @@ const VideoRecorder = () => {
     const mediaRecorderRef = useRef(null);
     const chunksRef = useRef([]);
     const accessToken = 'ya29.a0AeDClZCW8xJwhQAzo7HNNJ5Br53S9b9WZyqKE0CPsoK9YkyNgt3AvpjrYZdzN_qwZ5EkNOxH2Xv5K7S0FmPYpFYRqIsgQrlgTASuRhOm07O7Tu-yyGKGuw99zSqlNDvSwqp74rxGm4l3fREmhZdUcweN0BUBQ-xs3eCfr3P-msdO2XAaCgYKATMSARASFQHGX2Mi2LNrrdSe9tZjvlumamECVQ0182'
+
+    const [messages, setMessages] = useState(['hello'])
 
     const startRecording = async () => {
         try {
@@ -42,7 +48,8 @@ const VideoRecorder = () => {
             setIsRecording(false);
             console.log("uploading")
             console.log(recordedBlob)
-            await uploadBlobToBucket(recordedBlob, 'audio-files-122', 'video', accessToken)
+            await uploadBlobToBucket(recordedBlob, 'audio-files-122', 'video-2', accessToken)
+
         }
     };
 
@@ -62,13 +69,13 @@ const VideoRecorder = () => {
     return (
         <div className="video-recorder">
             <video ref={videoRef} className="video-preview" autoPlay muted playsInline />
-            {recordedBlob && (
-                <video
-                    className="recorded-video"
-                    src={URL.createObjectURL(recordedBlob)}
-                    controls
-                />
-            )}
+            {/*{recordedBlob && (*/}
+            {/*    <video*/}
+            {/*        className="recorded-video"*/}
+            {/*        src={URL.createObjectURL(recordedBlob)}*/}
+            {/*        controls*/}
+            {/*    />*/}
+            {/*)}*/}
             <div className="controls">
                 {!isRecording && (
                     <button className="record-button" onClick={startRecording}>
@@ -80,12 +87,13 @@ const VideoRecorder = () => {
                         Stop Recording
                     </button>
                 )}
-                {recordedBlob && (
-                    <button className="download-button" onClick={downloadVideo}>
-                        Download Video
-                    </button>
-                )}
+                {/*{recordedBlob && (*/}
+                {/*    <button className="download-button" onClick={downloadVideo}>*/}
+                {/*        Download Video*/}
+                {/*    </button>*/}
+                {/*)}*/}
             </div>
+            <ChatBox messages={[{text: 'test'}]}/>
         </div>
     );
 };
